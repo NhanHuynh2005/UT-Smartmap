@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OKIt8uSr01xebUrNusEceFYZapgxelm/HyHaJ5HW6tE=' 'sha256-tZBid3GscrXHJpo9oSUQ4MexLvTxvFk0cDRU3CJXFtc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OKIt8uSr01xebUrNusEceFYZapgxelm/HyHaJ5HW6tE=' 'sha256-+xyNLDwuQGqzB92I/YspmO1n5uC0XJwRtcSxbHbqZhw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 </head>
 <body>
@@ -282,6 +282,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
 .locmsg { margin-top: 8px; font-size: 13px; padding: 8px 10px; border-radius: var(--r-control); background: var(--raised); color: var(--ink); }
 .locmsg.good { background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
 .locmsg.warn { background: var(--pill-warn-bg); color: var(--pill-warn-ink); }
+.locmsg { transition: opacity .45s ease; }
+.locmsg.fadeout { opacity: 0; }
 .locmsg.bad { background: var(--pill-negative-bg); color: var(--pill-negative-ink); }
 #baseBtn { display: grid; place-items: center; }
 /* the base-map list opens to the LEFT of its button, floating, so the zoom buttons never move */
@@ -1904,9 +1906,16 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   var track = { on: false, id: null, follow: true, last: null, lastT: 0, fixes: 0 };
   var locMsg = $("locMsg"), trackBtn = $("track"), trackMap = $("trackMap");
   var campusMid = [(all[0] + all[2]) / 2, (all[1] + all[3]) / 2];
-  var mapMsg = $("mapMsg"), mapMsgT = 0;
-  function locSay(text, kind) {
+  var mapMsg = $("mapMsg"), mapMsgT = 0, fadeT = 0, fadeT2 = 0;
+  // fadeMs: let the note stay this long, then fade it out (both in the panel and on the map)
+  function locSay(text, kind, fadeMs) {
+    clearTimeout(fadeT); clearTimeout(fadeT2);
     locMsg.textContent = text; locMsg.className = "locmsg" + (kind ? " " + kind : ""); locMsg.hidden = !text;
+    if (text && fadeMs) fadeT = setTimeout(function () {
+      [locMsg, mapMsg].forEach(function (el) { el.classList.add("fadeout"); });
+      fadeT2 = setTimeout(function () { [locMsg, mapMsg].forEach(function (el) { el.hidden = true; el.classList.remove("fadeout"); }); },
+        window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450);
+    }, fadeMs);
     // the panel is often closed on a phone, so the same note shows on the map too
     clearTimeout(mapMsgT);
     mapMsg.textContent = text; mapMsg.className = "locmsg maptoast" + (kind ? " " + kind : "");
@@ -1970,7 +1979,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     if (err.code !== 1 && track.fixes) {                     // signal dropped for a moment while walking: keep watching
       locSay("Lost your signal for a moment. Still trying… (the route shows your last known spot)", "warn"); return;
     }
-    stopTracking(err.code === 1 ? "Location isn't allowed here. Turn on location for this site in your browser settings, or tap a building to start."
+    if (err.code === 1) { stopTracking("", ""); locSay("Location isn't allowed here. Turn on location for this site in your browser settings, or tap a building to start.", "bad", 10000); return; }
+    stopTracking(err.code === 1 ? ""
                : err.code === 3 ? "Couldn't get your location in time. Try again outside, or tap the map."
                : "Your location isn't available right now. Tap a building or type your start.", "bad");
   }
