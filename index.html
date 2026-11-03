@@ -620,14 +620,77 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
 }
 </script>
 <script type="application/json" id="updatesData">{
-  "_note": "PUBLIC change log shown on the website (menu > Updates). Write for students. Newest first. Never put security details, file paths, account names, keys or personal information here.",
+  "_note": "PUBLIC change log shown on the website (menu > Updates). One entry per day (campus time, ET): changes made on a new day get a new entry at the top with that day's date; never add them to an earlier day. Newest first. Write for students. Never put security details, file paths, account names, keys or personal information here.",
   "updates": [
     {
       "id": "2026-11-03",
       "date": "2026-11-03",
-      "title": "10 languages, live tracking, spoken directions, a compass and a safer site",
+      "title": "10 languages",
       "items": [
-        "Languages: use the site in English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español or Français with the globe button. Building names stay in English to match the signs on campus.",
+        "Languages: use the site in English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español or Français with the globe button. Building names stay in English to match the signs on campus."
+      ],
+      "i18n": {
+        "vi": {
+          "title": "10 ngôn ngữ",
+          "items": [
+            "Ngôn ngữ: dùng trang web bằng English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español hoặc Français qua nút quả địa cầu. Tên tòa nhà giữ nguyên tiếng Anh cho khớp với biển chỉ dẫn trong trường."
+          ]
+        },
+        "ja": {
+          "title": "10言語に対応",
+          "items": [
+            "言語：地球儀のボタンから English、Tiếng Việt、日本語、हिन्दी、नेपाली、简体中文、한국어、العربية、Español、Français を選べます。建物名はキャンパスの案内表示に合わせて英語のままです。"
+          ]
+        },
+        "hi": {
+          "title": "10 भाषाएँ",
+          "items": [
+            "भाषाएँ: ग्लोब बटन से साइट को English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español या Français में इस्तेमाल करें। इमारतों के नाम कैंपस के बोर्डों से मेल खाने के लिए अंग्रेज़ी में ही रहते हैं।"
+          ]
+        },
+        "ne": {
+          "title": "१० भाषा",
+          "items": [
+            "भाषा: ग्लोब बटनबाट साइटलाई English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español वा Français मा प्रयोग गर्नुहोस्। क्याम्पसका साइनबोर्डसँग मिलोस् भनेर भवनका नाम अङ्ग्रेजीमै रहन्छन्।"
+          ]
+        },
+        "zh": {
+          "title": "支持 10 种语言",
+          "items": [
+            "语言：通过地球图标按钮，可使用 English、Tiếng Việt、日本語、हिन्दी、नेपाली、简体中文、한국어、العربية、Español 或 Français。建筑名称保留英文，以便与校园标牌一致。"
+          ]
+        },
+        "ko": {
+          "title": "10개 언어 지원",
+          "items": [
+            "언어: 지구본 버튼으로 English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español, Français 중에서 고를 수 있습니다. 건물 이름은 캠퍼스 안내판과 맞추기 위해 영어로 표시합니다."
+          ]
+        },
+        "ar": {
+          "title": "10 لغات",
+          "items": [
+            "اللغات: استخدم الموقع بـ English أو Tiếng Việt أو 日本語 أو हिन्दी أو नेपाली أو 简体中文 أو 한국어 أو العربية أو Español أو Français عبر زر الكرة الأرضية. تبقى أسماء المباني بالإنجليزية لتطابق اللافتات في الحرم الجامعي."
+          ]
+        },
+        "es": {
+          "title": "10 idiomas",
+          "items": [
+            "Idiomas: usa el sitio en English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español o Français con el botón del globo. Los nombres de los edificios se mantienen en inglés para coincidir con los letreros del campus."
+          ]
+        },
+        "fr": {
+          "title": "10 langues",
+          "items": [
+            "Langues : utilisez le site en English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español ou Français grâce au bouton globe. Les noms des bâtiments restent en anglais pour correspondre aux panneaux du campus."
+          ]
+        }
+      }
+    },
+    {
+      "id": "2026-11-02",
+      "date": "2026-11-02",
+      "title": "Live tracking, spoken directions, a compass and a safer site",
+      "items": [
         "Track my location: follow your position live while you walk. The route and minutes update as you go, and it tells you when you arrive. Your location stays on your phone.",
         "Step-by-step directions: read every turn, or have them read aloud. Tap \"Step by step\" to show or hide the list. While tracking, the next step shows on the map and voice guidance can say it as you walk.",
         "Compass: the compass button shows where north is. Turn the map to face north, east, south or west, twist with two fingers (or Shift + drag on a computer), or let your phone's compass turn the map to face your direction.",
@@ -641,9 +704,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
       ],
       "i18n": {
         "vi": {
-          "title": "10 ngôn ngữ, theo dõi trực tiếp, chỉ đường bằng giọng nói, la bàn và trang web an toàn hơn",
+          "title": "Theo dõi trực tiếp, chỉ đường bằng giọng nói, la bàn và trang web an toàn hơn",
           "items": [
-            "Ngôn ngữ: dùng trang web bằng English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español hoặc Français qua nút quả địa cầu. Tên tòa nhà giữ nguyên tiếng Anh cho khớp với biển chỉ dẫn trong trường.",
             "Theo dõi vị trí của tôi: theo dõi vị trí trực tiếp khi bạn đi bộ. Tuyến đường và số phút cập nhật khi bạn di chuyển, và báo khi bạn đã đến nơi. Vị trí của bạn chỉ ở lại trên điện thoại.",
             "Chỉ đường từng bước: đọc từng lượt rẽ, hoặc nghe đọc to. Chạm “Từng bước” để hiện hoặc ẩn danh sách. Khi đang theo dõi, bước tiếp theo hiện trên bản đồ và hướng dẫn bằng giọng nói có thể đọc khi bạn đi.",
             "La bàn: nút la bàn cho biết hướng bắc. Xoay bản đồ để bắc, đông, nam hoặc tây ở trên, xoay bằng hai ngón tay (hoặc Shift + kéo trên máy tính), hoặc để la bàn của điện thoại xoay bản đồ theo hướng của bạn.",
@@ -657,9 +719,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "ja": {
-          "title": "10言語対応、リアルタイム追跡、音声案内、コンパス、より安全なサイト",
+          "title": "リアルタイム追跡、音声案内、コンパス、より安全なサイト",
           "items": [
-            "言語：地球儀のボタンから English、Tiếng Việt、日本語、हिन्दी、नेपाली、简体中文、한국어、العربية、Español、Français を選べます。建物名はキャンパスの案内表示に合わせて英語のままです。",
             "現在地を追跡：歩きながら現在地をリアルタイムで追跡します。進むにつれてルートと所要時間が更新され、到着するとお知らせします。位置情報はスマートフォンの中にとどまります。",
             "ステップごとの案内：曲がり角を一つずつ確認したり、読み上げを聞いたりできます。「ステップごとの案内」をタップすると一覧を表示・非表示にできます。追跡中は次の案内が地図に表示され、音声案内が歩きながら読み上げます。",
             "コンパス：コンパスのボタンが北を示します。北・東・南・西を上にしたり、2本の指でひねったり（パソコンでは Shift + ドラッグ）、スマートフォンのコンパスで進行方向に地図を合わせたりできます。",
@@ -673,9 +734,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "hi": {
-          "title": "10 भाषाएँ, लाइव ट्रैकिंग, बोलकर रास्ता, कंपास और ज़्यादा सुरक्षित साइट",
+          "title": "लाइव ट्रैकिंग, बोलकर रास्ता, कंपास और ज़्यादा सुरक्षित साइट",
           "items": [
-            "भाषाएँ: ग्लोब बटन से साइट को English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español या Français में इस्तेमाल करें। इमारतों के नाम कैंपस के बोर्डों से मेल खाने के लिए अंग्रेज़ी में ही रहते हैं।",
             "मेरी लोकेशन ट्रैक करें: चलते समय अपनी जगह लाइव देखें। आगे बढ़ने के साथ रास्ता और मिनट अपडेट होते हैं, और पहुँचने पर बताया जाता है। आपकी लोकेशन आपके फ़ोन पर ही रहती है।",
             "एक-एक कदम रास्ता: हर मोड़ पढ़ें, या पढ़कर सुनें। सूची दिखाने या छिपाने के लिए “एक-एक कदम” पर टैप करें। ट्रैकिंग के दौरान अगला कदम नक्शे पर दिखता है और आवाज़ मार्गदर्शन चलते-चलते बता सकता है।",
             "कंपास: कंपास बटन दिखाता है कि उत्तर कहाँ है। नक्शे को उत्तर, पूर्व, दक्षिण या पश्चिम की ओर घुमाएँ, दो उँगलियों से घुमाएँ (कंप्यूटर पर Shift + खींचें), या फ़ोन के कंपास से नक्शे को अपनी दिशा की ओर घूमने दें।",
@@ -689,9 +749,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "ne": {
-          "title": "१० भाषा, लाइभ ट्र्याकिङ, बोलेर बाटो, कम्पास र अझ सुरक्षित साइट",
+          "title": "लाइभ ट्र्याकिङ, बोलेर बाटो, कम्पास र अझ सुरक्षित साइट",
           "items": [
-            "भाषा: ग्लोब बटनबाट साइटलाई English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español वा Français मा प्रयोग गर्नुहोस्। क्याम्पसका साइनबोर्डसँग मिलोस् भनेर भवनका नाम अङ्ग्रेजीमै रहन्छन्।",
             "मेरो स्थान ट्र्याक गर्नुहोस्: हिँड्दै गर्दा आफ्नो स्थान लाइभ हेर्नुहोस्। अघि बढ्दै जाँदा बाटो र मिनेट अपडेट हुन्छन्, र पुगेपछि बताइन्छ। तपाईंको स्थान तपाईंकै फोनमा रहन्छ।",
             "चरणबद्ध निर्देशन: हरेक मोड पढ्नुहोस्, वा पढेर सुन्नुहोस्। सूची देखाउन वा लुकाउन “चरणबद्ध निर्देशन” मा ट्याप गर्नुहोस्। ट्र्याकिङका बेला अर्को चरण नक्सामा देखिन्छ र आवाज निर्देशनले हिँड्दै गर्दा बताउन सक्छ।",
             "कम्पास: कम्पास बटनले उत्तर कता छ देखाउँछ। नक्सालाई उत्तर, पूर्व, दक्षिण वा पश्चिमतिर घुमाउनुहोस्, दुई औँलाले घुमाउनुहोस् (कम्प्युटरमा Shift + तान्नुहोस्), वा फोनको कम्पासले नक्सालाई तपाईंको दिशातिर घुमाउन दिनुहोस्।",
@@ -705,9 +764,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "zh": {
-          "title": "10 种语言、实时追踪、语音导航、指南针和更安全的网站",
+          "title": "实时追踪、语音导航、指南针和更安全的网站",
           "items": [
-            "语言：通过地球图标按钮，可使用 English、Tiếng Việt、日本語、हिन्दी、नेपाली、简体中文、한국어、العربية、Español 或 Français。建筑名称保留英文，以便与校园标牌一致。",
             "追踪我的位置：步行时实时追踪您的位置。路线和时间会随您前进而更新，到达时会提示您。您的位置只保留在手机上。",
             "分步导航：查看每个转弯，或让网站朗读。轻点“分步导航”可显示或隐藏列表。追踪时，下一步会显示在地图上，语音导航可边走边播报。",
             "指南针：指南针按钮显示北方。可让北、东、南或西朝上，用两根手指转动地图（电脑上按住 Shift 拖动），或让手机指南针按您的方向旋转地图。",
@@ -721,9 +779,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "ko": {
-          "title": "10개 언어, 실시간 추적, 음성 길안내, 나침반, 더 안전해진 사이트",
+          "title": "실시간 추적, 음성 길안내, 나침반, 더 안전해진 사이트",
           "items": [
-            "언어: 지구본 버튼으로 English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español, Français 중에서 고를 수 있습니다. 건물 이름은 캠퍼스 안내판과 맞추기 위해 영어로 표시합니다.",
             "내 위치 추적: 걷는 동안 내 위치를 실시간으로 추적합니다. 이동하면서 경로와 시간이 갱신되고, 도착하면 알려 줍니다. 위치는 휴대폰에만 남습니다.",
             "단계별 안내: 모든 회전 지점을 읽거나 소리로 들을 수 있습니다. “단계별 안내”를 탭하면 목록을 보이거나 숨길 수 있습니다. 추적 중에는 다음 안내가 지도에 표시되고, 음성 안내가 걸으면서 읽어 줍니다.",
             "나침반: 나침반 버튼이 북쪽을 가리킵니다. 북·동·남·서쪽을 위로 두거나, 두 손가락으로 비틀어 돌리거나(컴퓨터는 Shift + 끌기), 휴대폰 나침반으로 지도를 내 방향에 맞출 수 있습니다.",
@@ -737,9 +794,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "ar": {
-          "title": "10 لغات، وتتبّع مباشر، واتجاهات منطوقة، وبوصلة، وموقع أكثر أمانًا",
+          "title": "تتبّع مباشر، واتجاهات منطوقة، وبوصلة، وموقع أكثر أمانًا",
           "items": [
-            "اللغات: استخدم الموقع بـ English أو Tiếng Việt أو 日本語 أو हिन्दी أو नेपाली أو 简体中文 أو 한국어 أو العربية أو Español أو Français عبر زر الكرة الأرضية. تبقى أسماء المباني بالإنجليزية لتطابق اللافتات في الحرم الجامعي.",
             "تتبّع موقعي: تابع موقعك مباشرة أثناء المشي. يتحدّث المسار والدقائق كلما تقدّمت، ويخبرك عند الوصول. يبقى موقعك على هاتفك فقط.",
             "اتجاهات خطوة بخطوة: اقرأ كل منعطف، أو استمع إليها بصوت عالٍ. انقر على «خطوة بخطوة» لإظهار القائمة أو إخفائها. أثناء التتبّع تظهر الخطوة التالية على الخريطة ويمكن للإرشاد الصوتي نطقها وأنت تمشي.",
             "البوصلة: يوضّح زر البوصلة مكان الشمال. أدِر الخريطة ليكون الشمال أو الشرق أو الجنوب أو الغرب في الأعلى، أو أدِرها بإصبعين (أو Shift + سحب على الكمبيوتر)، أو دع بوصلة هاتفك تدير الخريطة باتجاهك.",
@@ -753,9 +809,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "es": {
-          "title": "10 idiomas, seguimiento en vivo, indicaciones habladas, brújula y un sitio más seguro",
+          "title": "Seguimiento en vivo, indicaciones habladas, brújula y un sitio más seguro",
           "items": [
-            "Idiomas: usa el sitio en English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español o Français con el botón del globo. Los nombres de los edificios se mantienen en inglés para coincidir con los letreros del campus.",
             "Seguir mi ubicación: sigue tu posición en vivo mientras caminas. La ruta y los minutos se actualizan a medida que avanzas, y te avisa cuando llegas. Tu ubicación se queda en tu teléfono.",
             "Indicaciones paso a paso: lee cada giro o escúchalo en voz alta. Toca “Paso a paso” para mostrar u ocultar la lista. Durante el seguimiento, el siguiente paso aparece en el mapa y la guía por voz puede decírtelo mientras caminas.",
             "Brújula: el botón de la brújula muestra dónde está el norte. Gira el mapa para poner arriba el norte, este, sur u oeste, gíralo con dos dedos (o Shift + arrastrar en la computadora) o deja que la brújula del teléfono oriente el mapa según tu dirección.",
@@ -769,9 +824,8 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
           ]
         },
         "fr": {
-          "title": "10 langues, suivi en direct, itinéraire vocal, boussole et un site plus sûr",
+          "title": "Suivi en direct, itinéraire vocal, boussole et un site plus sûr",
           "items": [
-            "Langues : utilisez le site en English, Tiếng Việt, 日本語, हिन्दी, नेपाली, 简体中文, 한국어, العربية, Español ou Français grâce au bouton globe. Les noms des bâtiments restent en anglais pour correspondre aux panneaux du campus.",
             "Suivre ma position : suivez votre position en direct pendant que vous marchez. L’itinéraire et les minutes se mettent à jour au fil de la marche, et le site vous prévient à l’arrivée. Votre position reste sur votre téléphone.",
             "Itinéraire étape par étape : lisez chaque virage ou écoutez-le à voix haute. Touchez « Étape par étape » pour afficher ou masquer la liste. Pendant le suivi, l’étape suivante s’affiche sur la carte et le guidage vocal peut l’annoncer pendant que vous marchez.",
             "Boussole : le bouton boussole indique le nord. Orientez la carte nord, est, sud ou ouest en haut, faites-la pivoter avec deux doigts (ou Maj + glisser sur ordinateur), ou laissez la boussole du téléphone l’orienter dans votre direction.",
