@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OKIt8uSr01xebUrNusEceFYZapgxelm/HyHaJ5HW6tE=' 'sha256-+xyNLDwuQGqzB92I/YspmO1n5uC0XJwRtcSxbHbqZhw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OKIt8uSr01xebUrNusEceFYZapgxelm/HyHaJ5HW6tE=' 'sha256-T5gtHAJADXQBh+GjNK94G9Ab7e+MEsXJkWIzOuDcZAQ='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 </head>
 <body>
@@ -291,6 +291,11 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
 .basemenu:not([hidden]) { animation: ut-menu-in 220ms cubic-bezier(.16,1,.3,1) both; }
 @keyframes ut-menu-in { from { opacity: 0; transform: translateX(8px) scale(.96); } to { opacity: 1; transform: none; } }
 .basemenu[hidden] { display: none; }
+.basemenu.top { bottom: auto; top: 0; transform-origin: right top; }
+.menuhead { margin: 2px 12px 4px; font-size: 12px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.menunote { margin: 4px 12px 2px; font-size: 12px; color: var(--muted); max-width: 170px; line-height: 1.4; }
+#compass { display: grid; place-items: center; }
+#compass #needle { transition: transform .12s linear; }
 .basemenu { display: grid; gap: 4px; padding: 6px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--r-control);
             box-shadow: 0 8px 24px rgb(0 15 62 / .16); /* taste-skill-ignore: a menu floats */ }
 .basemenu button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 6px; font: 500 14px var(--font); color: var(--ink); min-width: 84px; }
@@ -515,6 +520,16 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   <main class="mapwrap" aria-label="Campus map">
     <canvas id="map" role="img" aria-label="Campus map with the walking route"></canvas>
     <div class="mapctl">
+      <button type="button" id="compass" aria-label="Map direction: north is up. Change direction" aria-expanded="false" aria-controls="compassMenu" title="Compass"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><g id="needle"><path d="M12 3l3.2 9H8.8z" fill="#c4242a"/><path d="M12 21l-3.2-9h6.4z" fill="currentColor" opacity=".55"/><circle cx="12" cy="12" r="1.4" fill="var(--paper)"/></g><text id="compassN" x="12" y="2.6" text-anchor="middle" font-size="5" font-weight="700" fill="#c4242a">N</text></svg></button>
+      <div class="basemenu top" id="compassMenu" role="group" aria-label="Map direction" hidden>
+        <p class="menuhead" id="facing">Facing north</p>
+        <button type="button" data-face="0">North up</button>
+        <button type="button" data-face="90">East up</button>
+        <button type="button" data-face="180">South up</button>
+        <button type="button" data-face="270">West up</button>
+        <button type="button" data-face="me" id="faceMe">Face my direction</button>
+        <p class="menunote" id="faceNote"><span class="mouse-only">Or Shift + drag the map to turn it.</span><span class="touch-only">Or twist with two fingers to turn it.</span></p>
+      </div>
       <button type="button" id="zin" aria-label="Zoom in">+</button>
       <button type="button" id="zout" aria-label="Zoom out">−</button>
       <button type="button" id="fit" aria-label="Show whole campus">⌂</button>
@@ -539,7 +554,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
       <span class="keyroute"><i class="ln" style="border-color:var(--route);border-top-width:4px"></i>Route</span>
     </div>
     <div class="credit" id="credit"></div>
-    <div class="hint"><span class="mouse">Click a building · drag A or B to fine-tune · scroll to zoom</span><span class="touch">Tap a building · drag A or B · pinch to zoom</span></div>
+    <div class="hint"><span class="mouse">Click a building · drag A or B to fine-tune · scroll to zoom · Shift + drag to turn</span><span class="touch">Tap a building · drag A or B · pinch to zoom · twist to turn</span></div>
     <div id="tip" hidden></div>
   </main>
 </div>
@@ -594,12 +609,13 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   "_note": "PUBLIC change log shown on the website (menu > Updates). Write for students. Newest first. Never put security details, file paths, account names, keys or personal information here.",
   "updates": [
     {
-      "id": "2026-11-02b",
+      "id": "2026-11-02c",
       "date": "2026-11-02",
-      "title": "Live tracking, spoken directions and a safer site",
+      "title": "Live tracking, spoken directions, a compass and a safer site",
       "items": [
         "Track my location: follow your position live while you walk. The route and minutes update as you go, and it tells you when you arrive. Your location stays on your phone.",
         "Step-by-step directions: read every turn, or have them read aloud. Tap \"Step by step\" to show or hide the list. While tracking, the next step shows on the map and voice guidance can say it as you walk.",
+        "Compass: the compass button shows where north is. Turn the map to face north, east, south or west, twist with two fingers (or Shift + drag on a computer), or let your phone's compass turn the map to face your direction.",
         "Smoother feel: places, time and date respond with gentle motion, and the step list opens row by row. (Turned off if your device asks for reduced motion.)",
         "Two map backgrounds: Simple (the default) and Satellite.",
         "The clock follows the current time automatically. If you change it, tap \"Back to now\" to return.",
@@ -1175,14 +1191,24 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   var all = [Infinity, Infinity, -Infinity, -Infinity];
   E.edges.forEach(function (e) { all = [Math.min(all[0], e.box[0]), Math.min(all[1], e.box[1]), Math.max(all[2], e.box[2]), Math.max(all[3], e.box[3])]; });
   var userMoved = false;
-  var view = { s: 1, cx: (all[0] + all[2]) / 2, cy: (all[1] + all[3]) / 2 };   // s = pixels per metre
-  function fit() {                            // fit the campus above the on-map key
-    var key = document.querySelector(".mapkey"), kh = key ? key.offsetHeight + 12 : 0;
-    view.s = Math.min((W - 40) / (all[2] - all[0]), (H - 40 - kh) / (all[3] - all[1]));
-    view.cx = (all[0] + all[2]) / 2; view.cy = (all[1] + all[3]) / 2 - (kh / 2) / view.s;
+  // s = pixels per metre; hdg = the compass direction at the top of the screen (0 north, 90 east, ...)
+  var view = { s: 1, cx: (all[0] + all[2]) / 2, cy: (all[1] + all[3]) / 2, hdg: 0 };
+  function rc() { var r = view.hdg * Math.PI / 180; return [Math.cos(r), Math.sin(r)]; }
+  function fit() {                            // fit the campus above the on-map key (in whatever direction the map faces)
+    var key = document.querySelector(".mapkey"), kh = key ? key.offsetHeight + 12 : 0, k = rc(), xs = [], ys = [];
+    [[all[0], all[1]], [all[2], all[1]], [all[0], all[3]], [all[2], all[3]]].forEach(function (q) { xs.push(q[0] * k[0] - q[1] * k[1]); ys.push(q[0] * k[1] + q[1] * k[0]); });
+    var wx = Math.max.apply(null, xs) - Math.min.apply(null, xs), wy = Math.max.apply(null, ys) - Math.min.apply(null, ys);
+    view.s = Math.min((W - 40) / wx, (H - 40 - kh) / wy);
+    view.cx = (all[0] + all[2]) / 2; view.cy = (all[1] + all[3]) / 2;
+    var c = toWorld(W / 2, H / 2 + kh / 2); view.cx = c[0]; view.cy = c[1];
   }
-  function toScreen(q) { return [W / 2 + (q[0] - view.cx) * view.s, H / 2 - (q[1] - view.cy) * view.s]; }
-  function toWorld(x, y) { return [view.cx + (x - W / 2) / view.s, view.cy - (y - H / 2) / view.s]; }
+  function toScreen(q) {
+    var k = rc(), dx = (q[0] - view.cx) * view.s, dy = (q[1] - view.cy) * view.s;
+    return [W / 2 + dx * k[0] - dy * k[1], H / 2 - (dx * k[1] + dy * k[0])];
+  }
+  // a move on screen (pixels, y down) as a move on the ground (metres, y north)
+  function screenToGround(px, py, s) { var k = rc(), u = px / s, v = -py / s; return [u * k[0] + v * k[1], -u * k[1] + v * k[0]]; }
+  function toWorld(x, y) { var d = screenToGround(x - W / 2, y - H / 2, view.s); return [view.cx + d[0], view.cy + d[1]]; }
   function resize() {
     var r = cv.getBoundingClientRect(); dpr = window.devicePixelRatio || 1;
     var first = !W || !userMoved; W = r.width; H = r.height;
@@ -1240,8 +1266,10 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     if (tilesBad > 6 && tilesOk === 0) return false;          // tiles can't load here (offline, or blocked): plain map
     var z = Math.round(Math.log(156543.03392 * Math.cos(lat0) * view.s) / Math.LN2);
     z = Math.max(12, Math.min(B.max, z));
-    var n = Math.pow(2, z), a = E.unp(toWorld(0, 0)), c = E.unp(toWorld(W, H));
-    var x0 = Math.floor(lon2x(a[0], n)), x1 = Math.floor(lon2x(c[0], n)), y0 = Math.floor(lat2y(a[1], n)), y1 = Math.floor(lat2y(c[1], n));
+    var n = Math.pow(2, z), cs = [toWorld(0, 0), toWorld(W, 0), toWorld(0, H), toWorld(W, H)].map(function (q) { return E.unp(q); });
+    var lons = cs.map(function (q) { return q[0]; }), lats = cs.map(function (q) { return q[1]; });
+    var x0 = Math.floor(lon2x(Math.min.apply(null, lons), n)), x1 = Math.floor(lon2x(Math.max.apply(null, lons), n));
+    var y0 = Math.floor(lat2y(Math.max.apply(null, lats), n)), y1 = Math.floor(lat2y(Math.min.apply(null, lats), n));
     if ((x1 - x0 + 1) * (y1 - y0 + 1) > 120) return false;
     var any = false;
     for (var x = x0; x <= x1; x++) for (var y = y0; y <= y1; y++) {
@@ -1255,8 +1283,10 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
         t.img.src = src;
       }
       if (!t.ok) continue;
-      var nw = toScreen(E.p([x2lon(x, n), y2lat(y, n)])), se = toScreen(E.p([x2lon(x + 1, n), y2lat(y + 1, n)]));
-      ctx.drawImage(t.img, nw[0], nw[1], se[0] - nw[0] + 0.5, se[1] - nw[1] + 0.5);
+      var gw = E.p([x2lon(x, n), y2lat(y, n)]), ge = E.p([x2lon(x + 1, n), y2lat(y + 1, n)]), nw = toScreen(gw);
+      ctx.save(); ctx.translate(nw[0], nw[1]); ctx.rotate(-view.hdg * Math.PI / 180);
+      ctx.drawImage(t.img, 0, 0, (ge[0] - gw[0]) * view.s + 0.5, (gw[1] - ge[1]) * view.s + 0.5);
+      ctx.restore();
       any = true;
     }
     return any;
@@ -1266,7 +1296,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     $("credit").textContent = !B ? "" : failed ? "Base map unavailable here. Showing the simple map." : B.credit;
     document.querySelectorAll("[data-base]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-base") === base)); });
   }
-  function baseMenuOpen(open) { $("baseMenu").hidden = !open; $("baseBtn").setAttribute("aria-expanded", String(open)); }
+  function baseMenuOpen(open) { $("baseMenu").hidden = !open; $("baseBtn").setAttribute("aria-expanded", String(open)); if (open && $("compassMenu")) compassMenu(false); }
   $("baseBtn").addEventListener("click", function (ev) { ev.stopPropagation(); baseMenuOpen($("baseMenu").hidden); });
   // close it when you tap elsewhere or press Escape
   document.addEventListener("click", function (ev) { if (!$("baseMenu").hidden && !$("baseMenu").contains(ev.target)) baseMenuOpen(false); });
@@ -1278,6 +1308,90 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     });
   });
   showCredit();
+  // ================================================================ COMPASS AND MAP DIRECTION
+  var face = { me: false, got: 0, smooth: null, lastDraw: 0 };
+  function setHeading(h, keepFaceMe) {
+    view.hdg = ((h % 360) + 360) % 360;
+    if (!keepFaceMe && face.me) stopFaceMe();
+    showCompass();
+  }
+  function dirName(h) { return ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"][Math.round(h / 45) % 8]; }
+  function showCompass() {
+    var h = view.hdg;
+    $("needle").setAttribute("transform", "rotate(" + (-h).toFixed(1) + " 12 12)");
+    var nx = 12 + 9.4 * Math.sin(-h * Math.PI / 180), ny = 12 - 9.4 * Math.cos(-h * Math.PI / 180);
+    $("compassN").setAttribute("x", nx.toFixed(2)); $("compassN").setAttribute("y", (ny + 1.8).toFixed(2));
+    var label = face.me ? "Facing your direction (" + dirName(h) + ")" : "Facing " + dirName(h) + (h % 45 ? " (" + Math.round(h) + "°)" : "");
+    $("facing").textContent = label;
+    $("compass").setAttribute("aria-label", "Map direction: " + dirName(h) + " is up. Change direction");
+    document.querySelectorAll("[data-face]").forEach(function (b) {
+      var v = b.getAttribute("data-face");
+      b.setAttribute("aria-pressed", String(v === "me" ? face.me : !face.me && Math.round(h) % 360 === +v));
+    });
+  }
+  function compassMenu(open) {
+    $("compassMenu").hidden = !open; $("compass").setAttribute("aria-expanded", String(open));
+    if (open) { baseMenuOpen(false); if (!face.me) faceNote(""); }
+  }
+  $("compass").addEventListener("click", function (ev) { ev.stopPropagation(); compassMenu($("compassMenu").hidden); });
+  document.addEventListener("click", function (ev) { if (!$("compassMenu").hidden && !$("compassMenu").contains(ev.target)) compassMenu(false); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !$("compassMenu").hidden) { ev.stopImmediatePropagation(); compassMenu(false); $("compass").focus(); } });
+  document.querySelectorAll("[data-face]").forEach(function (b) {
+    b.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      var v = b.getAttribute("data-face");
+      if (v === "me") { if (face.me) stopFaceMe(); else startFaceMe(); return; }
+      if (face.me) stopFaceMe();
+      compassMenu(false);
+      animateView({ cx: view.cx, cy: view.cy, s: view.s, hdg: +v });
+    });
+  });
+  // "Face my direction": the phone's compass turns the map so what's ahead of you is up.
+  // The reading stays on the phone. Some phones ask first; computers usually have no compass.
+  function onOrient(e) {
+    var h = null;
+    if (typeof e.webkitCompassHeading === "number" && !isNaN(e.webkitCompassHeading)) h = e.webkitCompassHeading;     // iPhone
+    else if (e.absolute && typeof e.alpha === "number") h = 360 - e.alpha;                                              // Android
+    if (h === null) return;
+    var so = (screen.orientation && typeof screen.orientation.angle === "number") ? screen.orientation.angle : (window.orientation || 0);
+    h = (h + so + 360) % 360;
+    face.got++;
+    if (face.smooth === null) face.smooth = h;
+    else face.smooth = (face.smooth + (((h - face.smooth + 540) % 360) - 180) * 0.2 + 360) % 360;   // calm the jitter
+    var now = performance.now();
+    if (now - face.lastDraw > 50) { face.lastDraw = now; setHeading(face.smooth, true); again(); }
+  }
+  var noteDefault = $("faceNote").innerHTML;       // fixed text from this page, not from data
+  function faceNote(text) { var n = $("faceNote"); if (text) n.textContent = text; else n.innerHTML = noteDefault; }
+  function startFaceMe() {
+    var go = function () {
+      face.me = true; face.got = 0; face.smooth = null;
+      window.addEventListener("deviceorientationabsolute", onOrient, true);
+      window.addEventListener("deviceorientation", onOrient, true);
+      showCompass(); faceNote("Hold your phone flat and point it the way you're walking.");
+      setTimeout(function () {
+        if (face.me && !face.got) {
+          // no compass: while tracking, use the direction you're walking instead
+          if (track.on && state.from && state.from.gps && state.from.gps.heading != null && !isNaN(state.from.gps.heading)) {
+            faceNote("No compass here, so the map follows the direction you're walking.");
+          } else { stopFaceMe(); faceNote("This device doesn't share its direction. Pick a direction above instead."); }
+        }
+      }, 2000);
+    };
+    if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+      DeviceOrientationEvent.requestPermission().then(function (r) { if (r === "granted") go(); else faceNote("Motion & orientation access was declined, so the map can't follow your direction."); })
+        .catch(function () { faceNote("Your direction isn't available here."); });
+    } else if (typeof DeviceOrientationEvent !== "undefined") go();
+    else faceNote("This device doesn't share its direction. Pick a direction above instead.");
+  }
+  function stopFaceMe() {
+    face.me = false;
+    window.removeEventListener("deviceorientationabsolute", onOrient, true);
+    window.removeEventListener("deviceorientation", onOrient, true);
+    showCompass();
+  }
+  showCompass();
+
   function draw() {
     if (!W || !state.res) return;
     var now = performance.now(), s = state.res, closed = s.closed, lw = Math.max(1, Math.min(3, view.s * 1.2));
@@ -1372,7 +1486,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
       if (m[0] === "from" && p.gps && p.gps.live) {          // the "you are here" dot replaces A while tracking
         var hd = p.gps.heading;
         if (hd != null && !isNaN(hd)) {
-          var a = (hd - 90) * Math.PI / 180;
+          var a = (hd - view.hdg - 90) * Math.PI / 180;
           ctx.beginPath(); ctx.moveTo(P[0] + Math.cos(a) * 22, P[1] + Math.sin(a) * 22);
           ctx.lineTo(P[0] + Math.cos(a + 2.5) * 9, P[1] + Math.sin(a + 2.5) * 9); ctx.lineTo(P[0] + Math.cos(a - 2.5) * 9, P[1] + Math.sin(a - 2.5) * 9);
           ctx.closePath(); ctx.fillStyle = tok("--route"); ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
@@ -1417,18 +1531,20 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   function animateView(target) {
     userMoved = true;
     cancelAnimationFrame(viewAnim);
-    if (reduceMotion.matches) { view.cx = target.cx; view.cy = target.cy; view.s = target.s; draw(); return; }
-    var from = { cx: view.cx, cy: view.cy, s: view.s }, t0 = performance.now();
+    var turn = target.hdg === undefined ? 0 : ((target.hdg - view.hdg + 540) % 360) - 180;   // shortest way round
+    if (reduceMotion.matches) { view.cx = target.cx; view.cy = target.cy; view.s = target.s; view.hdg = (view.hdg + turn + 360) % 360; showCompass(); draw(); return; }
+    var from = { cx: view.cx, cy: view.cy, s: view.s, hdg: view.hdg }, t0 = performance.now(), dur = turn ? 420 : 260;
     (function step() {
-      var p = Math.min(1, (performance.now() - t0) / 260), e = easeOut(p);
+      var p = Math.min(1, (performance.now() - t0) / dur), e = easeOut(p);
       view.cx = from.cx + (target.cx - from.cx) * e; view.cy = from.cy + (target.cy - from.cy) * e;
       view.s = from.s * Math.pow(target.s / from.s, e);
+      if (turn) { view.hdg = (from.hdg + turn * e + 360) % 360; showCompass(); }
       draw(); if (p < 1) viewAnim = requestAnimationFrame(step);
     })();
   }
   function zoomTarget(x, y, k) {
-    var s2 = Math.max(0.3, Math.min(30, view.s * k)), w = toWorld(x, y);
-    return { s: s2, cx: w[0] - (x - W / 2) / s2, cy: w[1] + (y - H / 2) / s2 };
+    var s2 = Math.max(0.3, Math.min(30, view.s * k)), w = toWorld(x, y), d = screenToGround(x - W / 2, y - H / 2, s2);
+    return { s: s2, cx: w[0] - d[0], cy: w[1] - d[1] };
   }
 
   // ---------------------------------------------------------------- map interaction
@@ -1465,17 +1581,20 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
   }
   var pointers = {}, drag = null, pinch = null, mdrag = null;
   cv.addEventListener("pointerdown", function (ev) {
-    cv.setPointerCapture(ev.pointerId);
+    try { cv.setPointerCapture(ev.pointerId); } catch (e) {}
     pointers[ev.pointerId] = [ev.offsetX, ev.offsetY];
     var ids = Object.keys(pointers);
     if (ids.length === 1) {
       var mk = markerAt(ev.offsetX, ev.offsetY, ev.pointerType !== "mouse");
       if (mk) { mdrag = { which: mk, moved: 0, x: ev.offsetX, y: ev.offsetY }; drag = null; cv.classList.add("dragging"); $("tip").hidden = true; return; }
-      drag = { x: ev.offsetX, y: ev.offsetY, cx: view.cx, cy: view.cy, moved: 0 };
+      drag = { x: ev.offsetX, y: ev.offsetY, cx: view.cx, cy: view.cy, moved: 0,
+               turn: ev.pointerType === "mouse" && (ev.shiftKey || ev.button === 2), hdg: view.hdg,
+               a0: Math.atan2(ev.offsetY - H / 2, ev.offsetX - W / 2) };
     }
     if (ids.length === 2) {
       var a = pointers[ids[0]], b = pointers[ids[1]];
-      pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), s: view.s }; drag = null; mdrag = null;
+      pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), s: view.s, a: Math.atan2(b[1] - a[1], b[0] - a[0]), hdg: view.hdg, twisting: false };
+      drag = null; mdrag = null;
     }
   });
   cv.addEventListener("pointermove", function (ev) {
@@ -1489,12 +1608,21 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     if (pinch && ids.length === 2) {
       var a = pointers[ids[0]], b = pointers[ids[1]], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
       zoomAt(mid[0], mid[1], pinch.s * Math.hypot(a[0] - b[0], a[1] - b[1]) / pinch.d / view.s);
+      var da = (Math.atan2(b[1] - a[1], b[0] - a[0]) - pinch.a) * 180 / Math.PI;
+      da = ((da + 540) % 360) - 180;
+      if (!pinch.twisting && Math.abs(da) > 10) { pinch.twisting = true; pinch.a += (da > 0 ? 10 : -10) * Math.PI / 180; da -= da > 0 ? 10 : -10; }
+      if (pinch.twisting) turnAt(mid[0], mid[1], pinch.hdg - da);   // fingers turn clockwise -> map turns clockwise
       return;
     }
     if (drag) {
       var dx = ev.offsetX - drag.x, dy = ev.offsetY - drag.y;
       drag.moved = Math.max(drag.moved, Math.hypot(dx, dy));
-      if (drag.moved > 4) { userMoved = true; if (track.on && track.follow) { track.follow = false; trackUI(); } cv.classList.add("dragging"); view.cx = drag.cx - dx / view.s; view.cy = drag.cy + dy / view.s; draw(); }
+      if (drag.moved > 4 && drag.turn) {             // Shift + drag (or right-drag): turn the map around its centre
+        cv.classList.add("dragging");
+        var a1 = Math.atan2(ev.offsetY - H / 2, ev.offsetX - W / 2);
+        setHeading(drag.hdg - (a1 - drag.a0) * 180 / Math.PI); draw();
+      } else if (drag.moved > 4) { userMoved = true; if (track.on && track.follow) { track.follow = false; trackUI(); } cv.classList.add("dragging");
+        var g = screenToGround(dx, dy, view.s); view.cx = drag.cx - g[0]; view.cy = drag.cy - g[1]; draw(); }
       $("tip").hidden = true;
       return;
     }
@@ -1524,6 +1652,11 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     var after = toWorld(x, y);
     view.cx += before[0] - after[0]; view.cy += before[1] - after[1];
     draw();
+  }
+  cv.addEventListener("contextmenu", function (ev) { ev.preventDefault(); });   // right-drag turns the map
+  function turnAt(x, y, hdg) {                    // turn the map, keeping the point under (x, y) still
+    var before = toWorld(x, y); setHeading(hdg); var after = toWorld(x, y);
+    view.cx += before[0] - after[0]; view.cy += before[1] - after[1]; draw();
   }
   cv.addEventListener("wheel", function (ev) { ev.preventDefault(); zoomAt(ev.offsetX, ev.offsetY, Math.exp(-ev.deltaY * 0.0015)); }, { passive: false });
   cv.addEventListener("dblclick", function (ev) { zoomAt(ev.offsetX, ev.offsetY, 1.8); });
@@ -1963,6 +2096,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     lastQuick = performance.now();                           // no route-drawing animation on every step
     state.from = track.pin = pin; $("from").value = pin.name; $("fromErr").hidden = true;
     compute();
+    if (face.me && !face.got && c.heading != null && !isNaN(c.heading) && (c.speed || 0) > 0.4) setHeading(c.heading, true);
     if (track.follow) centerOn(pt);
     // arrived?
     if (state.to && Math.hypot(state.to.pt[0] - pt[0], state.to.pt[1] - pt[1]) < Math.max(20, Math.min(acc, 40))) {
