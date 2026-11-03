@@ -15,8 +15,6 @@ Routes change with the clock: when a building closes, the map stops sending you 
 ![10 languages](https://img.shields.io/badge/languages-10-ffd200?style=flat-square)
 ![No tracking or cookies](https://img.shields.io/badge/privacy-no%20tracking-2ea44f?style=flat-square)
 
-<img src="docs/screenshots/desktop.png" alt="UT SmartMap on a computer: directions panel on the left, campus map with the walking route on the right" width="900">
-
 </div>
 
 ---
@@ -65,14 +63,19 @@ UT SmartMap knows each building's hours and the university calendar, so the rout
 
 ## Screenshots
 
-<table>
+<p align="center">
+  <img src="docs/screenshots/desktop.png" alt="UT SmartMap on a computer: the directions panel with step-by-step directions, and the campus map with the walking route" width="900"><br>
+  <sub><b>On a computer</b>: route, minutes, detours and step-by-step directions beside the map.</sub>
+</p>
+
+<table align="center">
   <tr>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-tracking.png" alt="Live tracking on a phone, with the next step shown at the bottom of the map" width="300"><br>
+      <img src="docs/screenshots/phone-tracking.png" alt="Live tracking on a phone, with the next turn shown at the bottom of the map" width="280"><br>
       <sub><b>Live tracking</b>: your position, the route ahead and the next turn.</sub>
     </td>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="300"><br>
+      <img src="docs/screenshots/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="280"><br>
       <sub><b>Your language</b>: the whole interface in Tiếng Việt.</sub>
     </td>
   </tr>
