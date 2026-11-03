@@ -71,11 +71,11 @@ UT SmartMap knows each building's hours and the university calendar, so the rout
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-tracking.png" alt="Live tracking on a phone, with the next turn shown at the bottom of the map" width="280"><br>
+      <img src="UT-Smartmap/docs/screenshots/phone-tracking.png" alt="Live tracking on a phone, with the next turn shown at the bottom of the map" width="280"><br>
       <sub><b>Live tracking</b>: your position, the route ahead and the next turn.</sub>
     </td>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="280"><br>
+      <img src="UT-Smartmap/docs/screenshots/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="280"><br>
       <sub><b>Your language</b>: the whole interface in Tiếng Việt.</sub>
     </td>
   </tr>
