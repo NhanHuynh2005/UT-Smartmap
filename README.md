@@ -64,18 +64,18 @@ UT SmartMap knows each building's hours and the university calendar, so the rout
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/desktop.png" alt="UT SmartMap on a computer: the directions panel with step-by-step directions, and the campus map with the walking route" width="900"><br>
+  <img src="docs/desktop.png" alt="UT SmartMap on a computer: the directions panel with step-by-step directions, and the campus map with the walking route" width="900"><br>
   <sub><b>On a computer</b>: route, minutes, detours and step-by-step directions beside the map.</sub>
 </p>
 
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-tracking.png" alt="Live tracking on a phone, with the next turn shown at the bottom of the map" width="280"><br>
+      <img src="docs/phone-tracking.png" alt="Live tracking on a phone, with the next turn shown at the bottom of the map" width="280"><br>
       <sub><b>Live tracking</b>: your position, the route ahead and the next turn.</sub>
     </td>
     <td align="center" width="50%">
-      <img src="docs/screenshots/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="280"><br>
+      <img src="docs/phone-vietnamese.png" alt="UT SmartMap on a phone in Vietnamese" width="280"><br>
       <sub><b>Your language</b>: the whole interface in Tiếng Việt.</sub>
     </td>
   </tr>
