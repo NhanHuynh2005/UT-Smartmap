@@ -98,9 +98,9 @@ flowchart LR
 1. **The data comes from ArcGIS Pro.** The walking network (outdoor and indoor paths with a `Walk_time` in minutes), building outlines and opening hours are exported to `campus.json`.
 2. **Everything is built into one page.** `build_site.py` puts the data, the calendar, the routing engine and the translations into a single `index.html`. No server or database is needed.
 3. **Your browser finds the route.** When you choose a start, destination and time, the page:
-   - works out which buildings are closed at that moment (or on that calendar day),
-   - blocks the paths inside them,
-   - finds the fastest route with **Dijkstra's algorithm**, using real walking minutes.
+   - Works out which buildings are closed at that moment (or on that calendar day),
+   - Blocks the paths inside them,
+   - Finds the fastest route with **Dijkstra's algorithm**, using real walking minutes.
 4. **It matches ArcGIS Pro.** Presidents Hall → University Hall at 20:30 comes out at **1,185 m** on the website and **1,186 m** in the ArcGIS Pro network.
 
 ---
