@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-R43tI5GDjldN/101ptW3+jGheDlt+ZRNqoGfQrfaMwY=' 'sha256-IJoiAiW7XoxpOM4z+/rhkKj2/lNpqUFcYe0gxB84Hv0=' 'sha256-EA8gmC62uNm+jhxRc0cA8D6lUtww9iL3OZfRXsomAgM='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'self'; worker-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-T2BweuuAzGsf3CorsURvb4lNrjeGN2WmUX+yGVYPD9Q=' 'sha256-IJoiAiW7XoxpOM4z+/rhkKj2/lNpqUFcYe0gxB84Hv0=' 'sha256-rjFhhr7TmXuolS/Tz8lLmpKn2YvJoI4edQZ0ddDZ3KY='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://server.arcgisonline.com; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'self'; worker-src 'self'">
 <meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#003e7e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
@@ -45,8 +46,9 @@
   --r-card: 8px; --r-control: 6px;
   --pad: 24px; --gap: 16px; --control-h: 44px;
   --ease: cubic-bezier(.2, .7, .2, 1);
-  color-scheme: light;
+  color-scheme: light dark;   /* follow the system; the theme button pins light or dark below */
 }
+:root[data-theme="light"] { color-scheme: light; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground: #0e1013; --paper: #16191d; --raised: #1c2025; --active: #262b32;
@@ -125,7 +127,7 @@ button, input, select, textarea { font-family: inherit; }
 .langcode { font: 600 10px/1 var(--font); letter-spacing: .04em; }
 .langmenu { position: fixed; z-index: 60; min-width: 190px; max-height: 70vh; overflow: auto; display: grid; gap: 2px; padding: 6px;
             background: var(--paper); border: 1px solid var(--rule); border-radius: var(--r-control);
-            box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a menu floats */ animation: ut-pop 200ms cubic-bezier(.16,1,.3,1) both; }
+            box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a menu floats */ }
 .langmenu[hidden] { display: none; }
 .langmenu button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; padding: 9px 12px; border-radius: 6px; font: 500 15px/1.3 var(--font); color: var(--ink); }
 .langmenu button span { color: var(--muted); font-size: 12px; font-weight: 500; }
@@ -179,7 +181,7 @@ h1 { margin: 0; }
 .combo .cbtn:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 .clist { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20; max-height: 300px; overflow-y: auto; margin: 0; padding: 4px; list-style: none;
          background: var(--paper); border: 1px solid var(--rule); border-radius: var(--r-control);
-         box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a menu floats */ animation: ut-pop 160ms cubic-bezier(.16,1,.3,1) both; }
+         box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a menu floats */ }
 .clist[hidden] { display: none; }
 .clist .grp { padding: 8px 10px 4px; font: 600 12px/1.2 var(--font); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
 .clist .opt { padding: 8px 10px; border-radius: 6px; cursor: pointer; display: grid; gap: 2px; }
@@ -368,7 +370,6 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
 #baseBtn { display: grid; place-items: center; }
 /* the base-map list opens to the LEFT of its button, floating, so the zoom buttons never move */
 .basemenu { position: absolute; right: calc(100% + 8px); bottom: 0; transform-origin: right center; z-index: 3; }
-.basemenu:not([hidden]) { animation: ut-menu-in 220ms cubic-bezier(.16,1,.3,1) both; }
 @keyframes ut-menu-in { from { opacity: 0; transform: translateX(8px) scale(.96); } to { opacity: 1; transform: none; } }
 .basemenu[hidden] { display: none; }
 .basemenu.top { bottom: auto; top: 0; transform-origin: right top; }
@@ -386,7 +387,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
         border: 1px solid var(--rule); border-radius: var(--r-control); padding: 6px 10px; max-width: calc(100% - 32px); }
 .bcard { position: absolute; left: 16px; top: 16px; z-index: 6; width: 300px; max-width: calc(100% - 92px); max-height: calc(100% - 96px); overflow-y: auto;
          background: var(--paper); border: 1px solid var(--rule); border-radius: var(--r-card); padding: 14px 16px 12px;
-         box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a card floats over the map */ animation: ut-pop 200ms cubic-bezier(.16,1,.3,1) both; }
+         box-shadow: 0 10px 28px rgb(0 15 62 / .18); /* taste-skill-ignore: a card floats over the map */ }
 .bcard[hidden] { display: none; }
 .offnote { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 5; max-width: calc(100% - 32px); padding: 8px 12px; border-radius: var(--r-control);
            background: var(--ink); color: var(--paper); font: 500 13px/1.35 var(--font); text-align: center; box-shadow: 0 6px 18px rgb(0 15 62 / .2); /* taste-skill-ignore: a status floats */ }
@@ -479,19 +480,27 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
 @keyframes ut-pop { from { opacity: 0; transform: scale(.88); } to { opacity: 1; transform: none; } }
 @keyframes ut-row-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @keyframes ut-row-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-4px); } }
-.anim-in { animation: ut-in-left 340ms cubic-bezier(.16,1,.3,1) both; }
-.anim-down { animation: ut-from-above 420ms cubic-bezier(.22,1,.36,1) both; }
-.anim-up { animation: ut-from-below 420ms cubic-bezier(.22,1,.36,1) both; }
-.anim-badge { animation: ut-badge 380ms cubic-bezier(.16,1,.3,1) both; }
-.anim-rise { animation: ut-rise 320ms cubic-bezier(.16,1,.3,1) both; }
-.anim-pop { animation: ut-pop 300ms cubic-bezier(.16,1,.3,1) both; }
-.steplist.opening li { animation: ut-row-in 320ms cubic-bezier(.16,1,.3,1) both; animation-delay: calc(min(var(--i, 0), 14) * 30ms); }
-.steplist.closing li { animation: ut-row-out 160ms cubic-bezier(.4,0,1,1) both; }
+/* Motion is opt-in: these one-off animations all move something, so they only run when the visitor has not asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .anim-in { animation: ut-in-left 340ms cubic-bezier(.16,1,.3,1) both; }
+  .anim-down { animation: ut-from-above 420ms cubic-bezier(.22,1,.36,1) both; }
+  .anim-up { animation: ut-from-below 420ms cubic-bezier(.22,1,.36,1) both; }
+  .anim-badge { animation: ut-badge 380ms cubic-bezier(.16,1,.3,1) both; }
+  .anim-rise { animation: ut-rise 320ms cubic-bezier(.16,1,.3,1) both; }
+  .anim-pop { animation: ut-pop 300ms cubic-bezier(.16,1,.3,1) both; }
+  .steplist.opening li { animation: ut-row-in 320ms cubic-bezier(.16,1,.3,1) both; animation-delay: calc(min(var(--i, 0), 14) * 30ms); }
+  .steplist.closing li { animation: ut-row-out 160ms cubic-bezier(.4,0,1,1) both; }
+  .langmenu { animation: ut-pop 200ms cubic-bezier(.16,1,.3,1) both; }
+  .clist { animation: ut-pop 160ms cubic-bezier(.16,1,.3,1) both; }
+  .bcard { animation: ut-pop 200ms cubic-bezier(.16,1,.3,1) both; }
+  .basemenu:not([hidden]) { animation: ut-menu-in 220ms cubic-bezier(.16,1,.3,1) both; }
+}
+/* Reduced motion: stop sliding, turning and growing, but keep colour and fade changes so hover and focus states still show. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+  *, *::before, *::after { transition-property: color, background-color, border-color, box-shadow, opacity, outline-color !important; }
 }
 </style>
-<script>try { var t = localStorage.getItem("ut-smartmap-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}</script>
+<script>try { var t = localStorage.getItem("ut-smartmap-theme"); if (t === "light" || t === "dark") { document.documentElement.setAttribute("data-theme", t); document.querySelector('meta[name="color-scheme"]').content = t; } } catch (e) {}</script>
 
 <div class="app">
   <nav class="rail" aria-label="Menu" data-i18n-aria="menu">
@@ -3420,7 +3429,7 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     var line = [], end = E.pointOn(r.start);
     r.links.forEach(function (l) {
       var s = E.slice(l.i, l.f1, l.f2), z = s[s.length - 1];
-      if (Math.hypot(z[0] - end[0], z[1] - end[1]) < Math.hypot(s[0][0] - end[0], s[0][1] - end[1])) s = s.slice().reverse();
+      if (Math.hypot(z[0] - end[0], z[1] - end[1]) < Math.hypot(s[0][0] - end[0], s[0][1] - end[1])) s = s.toReversed();
       s.forEach(function (q) { var last = line[line.length - 1]; if (!last || Math.hypot(q[0] - last[0], q[1] - last[1]) > 0.3) line.push(q); });
       end = s[s.length - 1];
     });
@@ -3806,11 +3815,23 @@ details ol, details ul { padding-left: 18px; margin: 10px 0 0; display: grid; ga
     b.innerHTML = '<svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + THEME_ICON[t] + "</svg>";
     b.setAttribute("aria-label", T("theme_" + t) + ". " + T("theme_change")); b.title = T("theme_" + t);
   }
+  // the <meta name="color-scheme"> tells the browser which scheme to use for its own UI (scrollbars, form controls, the page background)
+  var schemeMeta = document.querySelector('meta[name="color-scheme"]');
+  function applyTheme(t) {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+    if (schemeMeta) schemeMeta.content = t === "auto" ? "light dark" : t;
+    showTheme();
+  }
   $("themeBtn").addEventListener("click", function () {
     var t = THEMES[(THEMES.indexOf(themeNow()) + 1) % THEMES.length];
-    if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+    applyTheme(t);
     try { if (t === "auto") localStorage.removeItem("ut-smartmap-theme"); else localStorage.setItem("ut-smartmap-theme", t); } catch (e) {}
-    showTheme();
+  });
+  // the choice can change in another tab: follow it here too
+  window.addEventListener("storage", function (ev) {
+    if (ev.key !== "ut-smartmap-theme" && ev.key !== null) return;
+    var t = ev.newValue === "light" || ev.newValue === "dark" ? ev.newValue : "auto";
+    if (t !== themeNow()) applyTheme(t);
   });
   showTheme();
   var langMenu = $("langMenu"), langBtn = $("langBtn");
